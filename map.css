@@ -57,7 +57,7 @@ body {
 #legend {
     position: absolute;
     font-size: large;
-    width: 7.6em;
+    min-width: 7.6em;
     margin: 0.2em;
     padding: 0.1em;
     bottom: 0;

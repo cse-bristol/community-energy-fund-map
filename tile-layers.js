@@ -10,13 +10,24 @@ var leaflet = require("leaflet"),
 	attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
     }),
 
-    //http://test-tiles.0d9303a4.cdn.memsites.com/Total%20Heat%20Density/Z{z}/{y}/{x}.png
-    nationalHeatMap = leaflet.tileLayer('/heat-map-cdn/Total%20Heat%20Density/Z{z}/{y}/{x}.png', {
-	attribution: '<a href="http://tools.decc.gov.uk/nationalheatmap/">English National Heat Map</a>,',
+    urbanRuralCEF = leaflet.tileLayer('tiles/Z{z}/{x}/{y}.png', {
+	attribution: "TODO",
 	minZoom: 2,
 	maxZoom: 17
     });
-nationalHeatMap.options.zIndex = 1;
+    
+urbanRuralCEF.options.zIndex = 1;
+urbanRuralCEF.legend = function(colour) {
+    if (colour.r > 0) {
+	if (colour.g > colour.r) {
+	    return "Mixed (zoom in for more detail)";
+	} else {
+	    return "Urban";
+	}
+    } else {
+	return "Rural";
+    }
+};
 
 var setupPixelHover = function(tileLayer) {
     var colourChanged = callbackFactory();
@@ -48,12 +59,11 @@ var setupPixelHover = function(tileLayer) {
 };
 
 module.exports = function(map, errors) {
-    nationalHeatMap.legend = require("./heat-map-legend.js")(map, errors);
-    setupPixelHover(nationalHeatMap);
+    setupPixelHover(urbanRuralCEF);
 
     return {
 	base: osmLayer,
-	overlay: nationalHeatMap
+	overlay: urbanRuralCEF
     };
 };
 

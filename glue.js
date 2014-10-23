@@ -20,6 +20,8 @@ var startCoordinates = [55.5, 0],
     legend = body.append("div").attr("id", "legend"),
     map = new leaflet.Map("map", {
 	doubleClickZoom: false
+	/* WGS 84 World Mercator */
+	,crs: leaflet.CRS.EPSG3857
     })
 	.setView(startCoordinates, zoom),
     tileLayers = require("./tile-layers.js")(map, errors),

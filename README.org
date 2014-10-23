@@ -1,7 +1,7 @@
 * Community Energy Map
-A web-based map which shows the Rural and Urban areas eligible for the Community Energy Fund in the United Kingdom.
+A web-based map which shows the Rural (RCEF) and Urban (UCEF) areas eligible for the Community Energy Fund in the United Kingdom.
 
-Uses the [[http://leafletjs.com/][Leaflet]] library to display an Open Street Map base layer. Overlays it with a tile layer.
+Uses the [[http://leafletjs.com/][Leaflet]] library to display an Open Street Map base layer. Overlays it with tiles showing the UCEF and RCEF areas.
 
 Search for a location (for example, a postcode) using the search box, then hover the mouse over the map to see the rural or urban status.
  
@@ -16,8 +16,31 @@ To install, clone the repository then serve using any web server, for example us
   sudo python3 -m http.server 80 &
 #+END_SRC
 
+*** Building the Tiles
+The tiles are not included in the source code repository as they are too large. The shapefiles from which they are generated are, however.
+
+To generate the tiles, you will need the following:
+ * make
+ * Python 2.7+
+ * mapnik
+ * mapnik Python bindings.
+
+On a Debian based system, these are available as apt packages:
+#+BEGIN_SRC sh
+  -- python and make are probably already installed
+  -- sudo aptitude install make
+  -- sudo aptitude install python
+  sudo aptitude install libmapnik-dev
+  sudo aptitude install python-mapnik
+#+END_SRC
+
+Having installed these, run:
+#+BEGIN_SRC sh
+  make tiles
+#+END_SRC
+
 *** Building the Code
-If you make changes to the code, you will need to rebuild it. Our Javascript files our arranged as node.js modules, and we use the 'browserify' tool to combine them into a single file.
+This step is only necessary if you make changes to the code. Our Javascript files our arranged as node.js modules, and we use the 'browserify' tool to combine them into a single file.
 
 Begin by installing [[http://nodejs.org/][Node JS]]. On a Debian-based system, I'd recommend using this PPA:
 #+BEGIN_SRC sh
