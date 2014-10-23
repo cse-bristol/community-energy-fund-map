@@ -1,6 +1,7 @@
 all: clean-bin bin tiles;
 
-.PHONY: clean clean-bin clean-tiles
+.PHONY: clean clean-bin clean-tiles tiles
+
 clean: clean-bin clean-tiles;
 clean-bin: ; rm -rf ./bin;
 clean-tiles: ; rm -rf ./tiles;
