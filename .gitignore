@@ -2,5 +2,6 @@ temp
 __pycache__
 *.pyc
 data
+tiles
 bin
 node_modules
