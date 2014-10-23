@@ -1,6 +1,6 @@
 temp
 __pycache__
 *.pyc
-data/processed
+data
 bin
 node_modules
