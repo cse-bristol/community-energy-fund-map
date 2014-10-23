@@ -17,8 +17,11 @@ var leaflet = require("leaflet"),
     });
     
 urbanRuralCEF.options.zIndex = 1;
+urbanRuralCEF.options.opacity = 0.6;
 urbanRuralCEF.legend = function(colour) {
-    if (colour.r > 0) {
+    if (colour.r === 0 && colour.g === 0 && colour.b === 0) {
+	return "N/A";
+    } else if (colour.r > 0) {
 	if (colour.g > colour.r) {
 	    return "Mixed (zoom in for more detail)";
 	} else {
@@ -50,9 +53,7 @@ var setupPixelHover = function(tileLayer) {
 			y = d3.event.offsetY ? d3.event.offsetY : d3.event.clientY - rect.top,
 			colourData = cache.getImageData(x, y, 1, 1).data;
 
-		    if (colourData[3] > 0) {
-			colourChanged(d3.rgb(colourData[0], colourData[1], colourData[2]));
-		    }
+		    colourChanged(d3.rgb(colourData[0], colourData[1], colourData[2]));
 		});
 	});
     }

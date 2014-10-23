@@ -1,4 +1,4 @@
-all: clean-bin bin tiles;
+all: clean-bin bin;
 
 .PHONY: clean clean-bin clean-tiles tiles
 
