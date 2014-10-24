@@ -44,7 +44,11 @@ var setupPixelHover = function(tileLayer) {
 	    d3.select(e.tile)
 		.on("mousemove", function() {
 		    if (cache === undefined) {
-			cache = document.createElement("canvas").getContext("2d");
+			var canvas = document.createElement("canvas");
+			canvas.width = this.width;
+			canvas.height = this.height;
+
+			var cache = canvas.getContext("2d");
 			cache.drawImage(this, 0, 0);
 		    }
 
