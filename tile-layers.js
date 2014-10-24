@@ -63,7 +63,7 @@ var setupPixelHover = function(tileLayer) {
     }
 };
 
-module.exports = function(map, errors) {
+module.exports = function(map) {
     setupPixelHover(urbanRuralCEF);
 
     return {

@@ -15,8 +15,6 @@ var startCoordinates = [55.5, 0],
     leaflet = require("leaflet"),
     body = d3.select("body"),
     mapDiv = body.append("div").attr("id", "map"),
-    toolbar = body.append("div").attr("id", "toolbar"),
-    errors = require("./errors.js")(body, toolbar),
     legend = body.append("div").attr("id", "legend"),
     map = new leaflet.Map("map", {
 	doubleClickZoom: false
@@ -25,7 +23,7 @@ var startCoordinates = [55.5, 0],
 	maxZoom: 17
     })
 	.setView(startCoordinates, zoom),
-    tileLayers = require("./tile-layers.js")(map, errors),
+    tileLayers = require("./tile-layers.js")(map),
     reverseColour = require("./colour.js").reverse;
 
 map
