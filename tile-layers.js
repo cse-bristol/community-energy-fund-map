@@ -11,7 +11,7 @@ var leaflet = require("leaflet"),
     }),
 
     urbanRuralCEF = leaflet.tileLayer('tiles/Z{z}/{x}/{y}.png', {
-	attribution: "TODO",
+	attribution: '<a href="http://www.cse.org.uk/">Centre for Sustainable Energy</a>',
 	minZoom: 2,
 	maxZoom: 17
     });
