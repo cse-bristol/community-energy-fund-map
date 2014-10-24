@@ -6,8 +6,8 @@ var leaflet = require("leaflet"),
     d3 = require("d3"),
     callbackFactory = require("./helpers.js").callbackHandler,
 
-    osmLayer = leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+    Esri_WorldTopoMap = leaflet.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
     }),
 
     urbanRuralCEF = leaflet.tileLayer('tiles/Z{z}/{x}/{y}.png', {
@@ -63,7 +63,7 @@ module.exports = function(map, errors) {
     setupPixelHover(urbanRuralCEF);
 
     return {
-	base: osmLayer,
+	base: Esri_WorldTopoMap,
 	overlay: urbanRuralCEF
     };
 };
