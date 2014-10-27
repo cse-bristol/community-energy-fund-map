@@ -11,7 +11,7 @@ var startCoordinates = [55.5, 0],
     d3 = require("d3"),
     _ = require("lodash"),
     dialogue = require("floating-dialogue"),
-    geocoder = require("leaflet-control-geocoder"),
+    geocoderClass = require("leaflet-control-geocoder"),
     leaflet = require("leaflet"),
     body = d3.select("body"),
     mapDiv = body.append("div").attr("id", "map"),
@@ -24,12 +24,15 @@ var startCoordinates = [55.5, 0],
     })
 	.setView(startCoordinates, zoom),
     tileLayers = require("./tile-layers.js")(map),
-    reverseColour = require("./colour.js").reverse;
-
-map
-    .addControl(new geocoder({
+    reverseColour = require("./colour.js").reverse,
+    geocoder = new geocoderClass({
 	email: "research@cse.org.uk"
-    }))
+    });
+
+require("./search-legend.js")(map, geocoder, tileLayers.overlay);
+    
+map
+    .addControl(geocoder)
     .addLayer(tileLayers.base)
     .addLayer(tileLayers.overlay);
 

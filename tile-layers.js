@@ -20,15 +20,22 @@ urbanRuralCEF.options.zIndex = 1;
 urbanRuralCEF.options.opacity = 0.6;
 urbanRuralCEF.legend = function(colour) {
     if (colour.r === 0 && colour.g === 0 && colour.b === 0) {
-	return "N/A";
-    } else if (colour.r > 0) {
-	if (colour.g > colour.r) {
-	    return "Mixed (zoom in for more detail)";
-	} else {
-	    return "Urban";
-	}
+	return "n/a";
+
+    } else if (colour.r  === colour.b && colour.r === colour.g) {
+	return "Urban";
+
+    } else if (colour.g > 0 && colour.b > 0) {
+	return "Mixed (zoom in for more detail)";
+
+    } else if (colour.g > 0) {
+	return "Not Urban";
+
+    } else if (colour.b > 0) {
+	return 'Contact DEFRA to determine';
+    
     } else {
-	return "Rural";
+	return "n/a";
     }
 };
 
@@ -39,23 +46,19 @@ var setupPixelHover = function(tileLayer) {
     if (tileLayer.legend !== undefined) {
 
 	tileLayer.on("tileload", function(e) {
-	    var cache;
+	    var canvas = document.createElement("canvas");
+	    canvas.width = e.tile.width;
+	    canvas.height = e.tile.height;
+	    
+	    e.tile.cache = canvas.getContext("2d");
+	    e.tile.cache.drawImage(e.tile, 0, 0);
 
 	    d3.select(e.tile)
 		.on("mousemove", function() {
-		    if (cache === undefined) {
-			var canvas = document.createElement("canvas");
-			canvas.width = this.width;
-			canvas.height = this.height;
-
-			var cache = canvas.getContext("2d");
-			cache.drawImage(this, 0, 0);
-		    }
-
 		    var rect = this.getBoundingClientRect(),
 			x = d3.event.offsetX ? d3.event.offsetX : d3.event.clientX - rect.left,
 			y = d3.event.offsetY ? d3.event.offsetY : d3.event.clientY - rect.top,
-			colourData = cache.getImageData(x, y, 1, 1).data;
+			colourData = this.cache.getImageData(x, y, 1, 1).data;
 
 		    colourChanged(d3.rgb(colourData[0], colourData[1], colourData[2]));
 		});
