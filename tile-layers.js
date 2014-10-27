@@ -5,6 +5,7 @@
 var leaflet = require("leaflet"),
     d3 = require("d3"),
     callbackFactory = require("./helpers.js").callbackHandler,
+    imageData = require("./image-data.js"),
 
     Esri_WorldTopoMap = leaflet.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
@@ -46,12 +47,7 @@ var setupPixelHover = function(tileLayer) {
     if (tileLayer.legend !== undefined) {
 
 	tileLayer.on("tileload", function(e) {
-	    var canvas = document.createElement("canvas");
-	    canvas.width = e.tile.width;
-	    canvas.height = e.tile.height;
-	    
-	    e.tile.cache = canvas.getContext("2d");
-	    e.tile.cache.drawImage(e.tile, 0, 0);
+	    e.tile.cache = imageData(e.tile);
 
 	    d3.select(e.tile)
 		.on("mousemove", function() {

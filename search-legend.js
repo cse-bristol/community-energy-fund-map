@@ -3,7 +3,8 @@
 /*global module, require, d3*/
 
 var reverse = require("./colour.js").reverse,
-    leaflet = require("leaflet");
+    leaflet = require("leaflet"),
+    imageData = require("./image-data.js");
 
 module.exports = function(map, geocoder, tileLayer) {
     var wrapped = geocoder._createAlt,
@@ -30,17 +31,6 @@ module.exports = function(map, geocoder, tileLayer) {
 	};
     };
 
-    var asCanvas = function(img) {
-	var canvas = document.createElement("canvas");
-	canvas.width = img.width;
-	canvas.height = img.height;
-	
-	var context = canvas.getContext("2d");
-	context.drawImage(img, 0, 0);
-
-	return context;
-    };
-
     var annotateResult = function(r, key, offset) {
 	var colourData = cache.get(key).getImageData(offset.x, offset.y, 1, 1).data,
 	    colour = d3.rgb(colourData[0], colourData[1], colourData[2]);
@@ -60,20 +50,19 @@ module.exports = function(map, geocoder, tileLayer) {
 	if (zoom > tileLayer.options.maxZoom) {
 	    zoom = tileLayer.options.maxZoom;
 	}
-
-	// var northWest = tileLookup(d.bbox.getNorthWest(), zoom),
-	//     southEast = tileLookup(d.bbox.getSouthEast(), zoom),
+	
 	var center = tileLookup(d.center, zoom),
-	    key = center.x + ':' + center.y + ':' + center.z,
+	    key = center.tile.x + ':' + center.tile.y + ':' + center.tile.z,
 	    r = d3.select(result);
 
 	if (cache.has(key)) {
 	    // Re-use the image if we've already looked at it.
+	    console.log(key);
 	    annotateResult(r, key, center.offset);
 
 	} else if (key in tileLayer._tiles) {
 	    // If this tile has been requested by the map, use it.
-	    cache.set(key, asCanvas(tileLayer._tiles[key]));
+	    cache.set(key, tileLayer._tiles[key].cache);
 	    annotateResult(r, key, center.offset);
 
 	} else {
@@ -81,7 +70,7 @@ module.exports = function(map, geocoder, tileLayer) {
 	    var img = document.createElement('img');
 	    img.src = tileLayer.getTileUrl(center.tile);
 	    img.onload = function() {
-		cache.set(key, asCanvas(img));
+		cache.set(key, imageData(img));
 		annotateResult(r, key, center.offset);
 	    };
 	}
