@@ -2,8 +2,7 @@ all: clean-bin bin;
 
 .PHONY: clean clean-bin clean-tiles tiles
 
-clean: clean-bin clean-tiles;
-clean-bin: ; rm -rf ./bin;
+clean: ; rm -rf ./bin; rm -rf node_modules;
 clean-tiles: ; rm -rf ./tiles;
 
 node_modules: ; npm install;

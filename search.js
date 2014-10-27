@@ -20,6 +20,10 @@ var d3 = require("d3"),
 require("leaflet-control-geocoder");
 
 var geocoder = new leaflet.Control.Geocoder.Nominatim({
+    geocodingQueryParams: {
+	countrycodes: "gb",
+	limit: 20
+    },
     email: "research@cse.org.uk"
 });
 
