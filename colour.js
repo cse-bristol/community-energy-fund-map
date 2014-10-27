@@ -29,9 +29,22 @@ var scale = function(data, colour) {
 var reverse = function(colour) {
     var rgb = d3.rgb(colour),
 	lab = d3.lab(rgb.toString()),
-	reverse = d3.lab(lab.l, -lab.a, -lab.b);
+	newL = (lab.l + 50) % 100;
     
-    return d3.lab((lab.l + 50) % 100, -lab.a, -lab.b);
+    if (Math.abs(lab.a - lab.b) < 20) {
+	return d3.lab(
+	    newL,
+	    lab.a + 128,
+	    lab.b - 128
+	);
+	
+    } else {
+	return d3.lab(
+	    newL,
+		-lab.a, 
+		-lab.b
+	);
+    }
 };
 
 module.exports = {

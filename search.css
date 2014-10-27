@@ -9,11 +9,10 @@
 
 #results li {
     padding: 0.1em;
-    margin: 0.2em;
+    margin-bottom: 0.2em;
     opacity: 0.8;
     font-size: large;
     font-family: helvetica;
-
 }
 
 #results li:hover {
