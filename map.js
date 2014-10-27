@@ -10,7 +10,6 @@ var startCoordinates = [55.5, 0],
     zoom = 6,
     d3 = require("d3"),
     _ = require("lodash"),
-    dialogue = require("floating-dialogue"),
     geocoderClass = require("leaflet-control-geocoder"),
     leaflet = require("leaflet"),
     body = d3.select("body"),
@@ -29,7 +28,7 @@ var startCoordinates = [55.5, 0],
 	email: "research@cse.org.uk"
     });
 
-require("./search-legend.js")(map, geocoder, tileLayers.overlay);
+require("./search-legend.js")(map, tileLayers.overlay).modifyGeocoder(geocoder);
     
 map
     .addControl(geocoder)

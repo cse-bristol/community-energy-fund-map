@@ -1,0 +1,34 @@
+#geo-search {
+    font-size: x-large;
+}
+
+#results {
+    list-style-type: none;
+    padding: 0;
+}
+
+#results li {
+    padding: 0.1em;
+    margin: 0.2em;
+    opacity: 0.8;
+    font-size: large;
+    font-family: helvetica;
+
+}
+
+#results li:hover {
+    opacity: 1.0;
+}
+
+.search-result-legend {
+    float: right;
+}
+
+#map {
+    visibility: hidden;
+    height: 256px;
+    width: 256px;
+    position:fixed;
+    top: -1000px;
+    left: -1000px;
+}

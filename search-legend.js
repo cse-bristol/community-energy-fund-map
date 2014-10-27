@@ -6,9 +6,8 @@ var reverse = require("./colour.js").reverse,
     leaflet = require("leaflet"),
     imageData = require("./image-data.js");
 
-module.exports = function(map, geocoder, tileLayer) {
-    var wrapped = geocoder._createAlt,
-	cache = d3.map();
+module.exports = function(map, tileLayer) {
+    var cache = d3.map();
 
     var tileLookup = function(latlng, zoom) {
 	var s = tileLayer.options.tileSize,
@@ -36,31 +35,31 @@ module.exports = function(map, geocoder, tileLayer) {
 	    colour = d3.rgb(colourData[0], colourData[1], colourData[2]);
 
 	r.append("span")
-	    .text(tileLayer.legend(colour));
+	    .text(tileLayer.legend(colour))
+	    .classed("search-result-legend", true);
 
 	r
 	    .style("background-color", colour)
 	    .style("color", reverse(colour));
     };
 
-    geocoder._createAlt = function(d, i) {
-	var result = wrapped.call(geocoder, d, i),
-	    zoom = map.getBoundsZoom(d.bbox);
+    var colourResult = function(el, data) {
+	var zoom = map.getBoundsZoom(data.bbox);
 
 	if (zoom > tileLayer.options.maxZoom) {
 	    zoom = tileLayer.options.maxZoom;
 	}
 	
-	var center = tileLookup(d.center, zoom),
+	var center = tileLookup(data.center, zoom),
 	    key = center.tile.x + ':' + center.tile.y + ':' + center.tile.z,
-	    r = d3.select(result);
+	    r = d3.select(el);
 
 	if (cache.has(key)) {
 	    // Re-use the image if we've already looked at it.
 	    console.log(key);
 	    annotateResult(r, key, center.offset);
 
-	} else if (key in tileLayer._tiles) {
+	} else if (tileLayer._tiles && key in tileLayer._tiles) {
 	    // If this tile has been requested by the map, use it.
 	    cache.set(key, tileLayer._tiles[key].cache);
 	    annotateResult(r, key, center.offset);
@@ -74,8 +73,21 @@ module.exports = function(map, geocoder, tileLayer) {
 		annotateResult(r, key, center.offset);
 	    };
 	}
+    };
 
-	return result;
+    return {
+	modifyGeocoder: function(geocoder) {
+	    var wrapped = geocoder._createAlt;
+
+	    geocoder._createAlt = function(d, i) {
+		var result = wrapped.call(geocoder, d, i);
+
+		colourResult(result, d);
+
+		return result;
+	    };
+	},
+	colourResult: colourResult 
     };
 };
 

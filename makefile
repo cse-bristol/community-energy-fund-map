@@ -7,6 +7,6 @@ clean-bin: ; rm -rf ./bin;
 clean-tiles: ; rm -rf ./tiles;
 
 node_modules: ; npm install;
-bin: node_modules; mkdir -p bin; browserify glue.js -o ./bin/main.js;
+bin: node_modules; mkdir -p bin; browserify map.js -o ./bin/map.js; browserify search.js -o ./bin/search.js;
 
 tiles: ; mkdir -p tiles; python ./generate_tiles.py;

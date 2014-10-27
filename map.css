@@ -78,3 +78,7 @@ body {
 .leaflet-control-attribution {
    max-width: calc(100% - 25em);
 }
+
+.search-result-legend {
+    display: none;
+}
