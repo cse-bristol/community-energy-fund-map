@@ -34,10 +34,17 @@ module.exports = function(map, tileLayer) {
 	var colourData = cache.get(key).getImageData(offset.x, offset.y, 1, 1).data,
 	    colour = d3.rgb(colourData[0], colourData[1], colourData[2]);
 
-	return {
-	    colour: colour,
-	    legend: tileLayer.legend(colour)
-	};
+	if (colourData[3] === 0) {
+	    return {
+		colour: null,
+		legend: ""
+	    };
+	} else {
+	    return {
+		colour: colour,
+		legend: tileLayer.legend(colour)
+	    };
+	}
     };
 
     var colourResult = function(data, callback) {
@@ -71,7 +78,9 @@ module.exports = function(map, tileLayer) {
 		cache.set(key, imageData(img));
 		callbackWithParams();
 	    };
-	    img.onerror = img.onload;
+	    img.onerror = function() {
+		callback(null, "");
+	    };
 	    img.src = tileLayer.getTileUrl(center.tile);
 	}
     };
