@@ -34,8 +34,8 @@ var reverse = function(colour) {
     if (Math.abs(lab.a - lab.b) < 20) {
 	return d3.lab(
 	    newL,
-	    lab.a + 128,
-	    lab.b - 128
+	    lab.a + 64,
+	    lab.b - 64
 	);
 	
     } else {
