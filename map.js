@@ -21,8 +21,8 @@ var startCoordinates = [55.5, 0],
 	maxZoom: 17
     })
 	.setView(startCoordinates, zoom),
-    tileLayers = require("./tile-layers.js")(map),
-    reverseColour = require("./colour.js").reverse;
+    tileLayers = require("./js/tile-layers.js")(map),
+    reverseColour = require("./js/colour.js").reverse;
 
 require("leaflet-control-geocoder");
 var geocoder = new leaflet.Control.Geocoder({
@@ -34,7 +34,7 @@ var geocoder = new leaflet.Control.Geocoder({
     })
 });
 
-require("./search-legend.js")(map, tileLayers.overlay).modifyGeocoder(geocoder);
+require("./js/search-legend.js")(map, tileLayers.overlay).modifyGeocoder(geocoder);
     
 map
     .addControl(geocoder)

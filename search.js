@@ -13,9 +13,9 @@ var d3 = require("d3"),
 	/* WGS 84 World Mercator */
 	crs: leaflet.CRS.EPSG3857
     }),
-    tileLayers = require("./tile-layers.js")(map),
-    reverse = require("./colour.js").reverse,
-    colourResult = require("./search-legend.js")(map, tileLayers.overlay).colourResult;
+    tileLayers = require("./js/tile-layers.js")(map),
+    reverse = require("./js/colour.js").reverse,
+    colourResult = require("./js/search-legend.js")(map, tileLayers.overlay).colourResult;
 
 require("leaflet-control-geocoder");
 
