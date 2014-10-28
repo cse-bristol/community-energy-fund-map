@@ -5,13 +5,14 @@
 #results {
     list-style-type: none;
     padding: 0;
+    display: block;
+    font-size: large;
 }
 
 #results li {
     padding: 0.1em;
     margin-bottom: 0.2em;
     opacity: 0.8;
-    font-size: large;
     font-family: helvetica;
 }
 
@@ -41,4 +42,4 @@
     position:fixed;
     top: -1000px;
     left: -1000px;
-}
+}}

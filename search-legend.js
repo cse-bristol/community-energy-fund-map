@@ -30,20 +30,17 @@ module.exports = function(map, tileLayer) {
 	};
     };
 
-    var annotateResult = function(r, key, offset) {
+    var colourAndLegend = function(key, offset) {
 	var colourData = cache.get(key).getImageData(offset.x, offset.y, 1, 1).data,
 	    colour = d3.rgb(colourData[0], colourData[1], colourData[2]);
 
-	r.append("span")
-	    .text(tileLayer.legend(colour))
-	    .classed("search-result-legend", true);
-
-	r
-	    .style("background-color", colour)
-	    .style("color", reverse(colour));
+	return {
+	    colour: colour,
+	    legend: tileLayer.legend(colour)
+	};
     };
 
-    var colourResult = function(el, data) {
+    var colourResult = function(data, callback) {
 	var zoom = map.getBoundsZoom(data.bbox);
 
 	if (zoom > tileLayer.options.maxZoom) {
@@ -52,26 +49,30 @@ module.exports = function(map, tileLayer) {
 	
 	var center = tileLookup(data.center, zoom),
 	    key = center.tile.x + ':' + center.tile.y + ':' + center.tile.z,
-	    r = d3.select(el);
+	    callbackWithParams = function() {
+		var result = colourAndLegend(key, center.offset);
+		callback(result.colour, result.legend);
+	    };
+
 
 	if (cache.has(key)) {
 	    // Re-use the image if we've already looked at it.
-	    console.log(key);
-	    annotateResult(r, key, center.offset);
+	    callbackWithParams();
 
 	} else if (tileLayer._tiles && key in tileLayer._tiles) {
 	    // If this tile has been requested by the map, use it.
 	    cache.set(key, tileLayer._tiles[key].cache);
-	    annotateResult(r, key, center.offset);
+	    callbackWithParams();
 
 	} else {
 	    // Otherwise, load the tile.
 	    var img = document.createElement('img');
-	    img.src = tileLayer.getTileUrl(center.tile);
 	    img.onload = function() {
 		cache.set(key, imageData(img));
-		annotateResult(r, key, center.offset);
+		callbackWithParams();
 	    };
+	    img.onerror = img.onload;
+	    img.src = tileLayer.getTileUrl(center.tile);
 	}
     };
 
@@ -82,7 +83,12 @@ module.exports = function(map, tileLayer) {
 	    geocoder._createAlt = function(d, i) {
 		var result = wrapped.call(geocoder, d, i);
 
-		colourResult(result, d);
+		colourResult(d, function(colour, legend) {
+		    var el = d3.select(result);
+		    el
+			.style("background-color", colour)
+			.style("color", reverse(colour));
+		});
 
 		return result;
 	    };

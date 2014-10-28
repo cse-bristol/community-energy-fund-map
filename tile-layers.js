@@ -24,13 +24,13 @@ urbanRuralCEF.legend = function(colour) {
 	return "n/a";
 
     } else if (colour.r  === colour.b && colour.r === colour.g) {
-	return "Urban";
+	return "UCEF";
 
     } else if (colour.g > 0 && colour.b > 0) {
 	return "Mixed (zoom in for more detail)";
 
     } else if (colour.g > 0) {
-	return "Not Urban";
+	return "Not UCEF";
 
     } else if (colour.b > 0) {
 	return 'Contact DEFRA to determine';

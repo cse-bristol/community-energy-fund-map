@@ -14,7 +14,7 @@ var d3 = require("d3"),
 	crs: leaflet.CRS.EPSG3857
     }),
     tileLayers = require("./tile-layers.js")(map),
-    reverseColour = require("./colour.js").reverse,
+    reverse = require("./colour.js").reverse,
     colourResult = require("./search-legend.js")(map, tileLayers.overlay).colourResult;
 
 require("leaflet-control-geocoder");
@@ -53,7 +53,16 @@ d3.select("#geo-search")
 
 		li
 		    .each(function(d, i) {
-			colourResult(this, d);
+			var el = d3.select(this);
+
+			colourResult(d, function(colour, legend) {
+			    el
+				.style("background-color", colour)
+				.style("color", reverse(colour))
+				.append("span")
+				.text(legend)
+				.classed("search-result-legend", true);
+			});
 		    });
 	    }, 
 	    this);
