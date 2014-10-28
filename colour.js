@@ -27,6 +27,11 @@ var scale = function(data, colour) {
  Used to make readable foreground colours against a coloured background.
  */
 var reverse = function(colour) {
+    if (colour === null) {
+	// Against a transparent (null) background, we want black text.
+	return "black";
+    }
+
     var rgb = d3.rgb(colour),
 	lab = d3.lab(rgb.toString()),
 	newL = (lab.l + 50) % 100;
