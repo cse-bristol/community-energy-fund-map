@@ -10,7 +10,6 @@ var startCoordinates = [55.5, 0],
     zoom = 6,
     d3 = require("d3"),
     _ = require("lodash"),
-    geocoderClass = require("leaflet-control-geocoder"),
     leaflet = require("leaflet"),
     body = d3.select("body"),
     mapDiv = body.append("div").attr("id", "map"),
@@ -23,10 +22,17 @@ var startCoordinates = [55.5, 0],
     })
 	.setView(startCoordinates, zoom),
     tileLayers = require("./tile-layers.js")(map),
-    reverseColour = require("./colour.js").reverse,
-    geocoder = new geocoderClass({
-	email: "research@cse.org.uk"
-    });
+    reverseColour = require("./colour.js").reverse;
+
+require("leaflet-control-geocoder");
+var geocoder = new leaflet.Control.Geocoder({
+    email: "research@cse.org.uk",
+    geocoder: new leaflet.Control.Geocoder.Nominatim({
+	geocodingQueryParams: {
+	    countrycodes: "gb"
+	}
+    })
+});
 
 require("./search-legend.js")(map, tileLayers.overlay).modifyGeocoder(geocoder);
     
