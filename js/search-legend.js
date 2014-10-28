@@ -50,8 +50,8 @@ module.exports = function(map, tileLayer) {
     var colourResult = function(data, callback) {
 	var zoom = map.getBoundsZoom(data.bbox);
 
-	if (zoom > tileLayer.options.maxZoom) {
-	    zoom = tileLayer.options.maxZoom;
+	if (zoom > tileLayer.options.maxNativeZoom) {
+	    zoom = tileLayer.options.maxNativeZoom;
 	}
 	
 	var center = tileLookup(data.center, zoom),

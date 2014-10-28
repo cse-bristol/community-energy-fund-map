@@ -11,11 +11,21 @@ var d3 = require("d3");
  */
 module.exports = function(img) {
     var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
+   canvas.width = img.naturalWidth;
+   canvas.height = img.naturalHeight;
     
     var context = canvas.getContext("2d");
     context.drawImage(img, 0, 0);
 
-    return context;
+    return {
+	getImageData: function(img, x, y, xSize, ySize) {
+
+	    return context.getImageData(
+
+		x * canvas.width / img.width, 
+		y * canvas.height / img.height, 
+		xSize, 
+		ySize);
+	}
+    };
 };

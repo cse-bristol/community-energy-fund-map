@@ -14,7 +14,7 @@ var leaflet = require("leaflet"),
     urbanRuralCEF = leaflet.tileLayer('tiles/Z{z}/{x}/{y}.png', {
 	attribution: '<a href="./method.html">RCEF/UCEF map tiles by the Centre for Sustainable Energy</a>',
 	minZoom: 2,
-	maxZoom: 17
+	maxNativeZoom: 16
     });
     
 urbanRuralCEF.options.zIndex = 1;
@@ -54,7 +54,7 @@ var setupPixelHover = function(tileLayer) {
 		    var rect = this.getBoundingClientRect(),
 			x = d3.event.offsetX ? d3.event.offsetX : d3.event.clientX - rect.left,
 			y = d3.event.offsetY ? d3.event.offsetY : d3.event.clientY - rect.top,
-			colourData = this.cache.getImageData(x, y, 1, 1).data;
+			colourData = this.cache.getImageData(this, x, y, 1, 1).data;
 
 		    colourChanged(d3.rgb(colourData[0], colourData[1], colourData[2]));
 		});
