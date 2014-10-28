@@ -195,5 +195,5 @@ if __name__ == "__main__":
         mapfile, 
         tile_dir, 
         2,
-        17, 
+        16, 
         "United Kingdom")
