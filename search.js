@@ -42,10 +42,16 @@ d3.select("#geo-search")
 			    });
 
 		r.exit().remove();
-		r.enter().append("li")
+		var li = r.enter().append("li");
+
+		li
+		    .append("span")
+		    .classed("search-result", true)
 		    .text(function(d, i) {
 			return d.name;
-		    })
+		    });
+
+		li
 		    .each(function(d, i) {
 			colourResult(this, d);
 		    });

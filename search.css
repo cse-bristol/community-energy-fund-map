@@ -19,8 +19,19 @@
     opacity: 1.0;
 }
 
+.search-result {
+    width: calc(100% - 14em);
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .search-result-legend {
-    float: right;
+    position: absolute;
+    right: 1em;
+    width: 14em;
+    text-align: right;
 }
 
 #map {
