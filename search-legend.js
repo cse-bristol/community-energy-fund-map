@@ -96,6 +96,7 @@ module.exports = function(map, tileLayer) {
 		    var el = d3.select(result);
 		    el
 			.style("background-color", colour)
+			.selectAll("span")
 			.style("color", reverse(colour));
 		});
 
