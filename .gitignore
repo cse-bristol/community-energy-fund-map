@@ -1,7 +1,7 @@
 temp
 __pycache__
 *.pyc
-data
+data/RCEFUCEF*
 tiles
 bin
 node_modules
