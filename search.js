@@ -17,15 +17,7 @@ var d3 = require("d3"),
     reverse = require("./js/colour.js").reverse,
     colourResult = require("./js/search-legend.js")(map, tileLayers.overlay).colourResult;
 
-require("leaflet-control-geocoder");
-
-var geocoder = new leaflet.Control.Geocoder.Nominatim({
-    geocodingQueryParams: {
-	countrycodes: "gb",
-	limit: 20
-    },
-    email: "research@cse.org.uk"
-});
+var geocoder = require("./js/geocoder.js");
 
 d3.select("#geo-search")
     .attr("placeholder", "Postcode")
