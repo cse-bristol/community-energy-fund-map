@@ -24,7 +24,7 @@ module.exports = function() {
 			for (var i = 0; i <= data.candidates.length - 1; i++) {
 			    var loc = data.candidates[i],
 				northEast = L.latLng(loc.extent.ymax, loc.extent.xmin),
-				southWest = L.latLng(loc.extend.ymin, loc.extend.xmax);
+				southWest = L.latLng(loc.extent.ymin, loc.extent.xmax);
 
 			    results[i] = {
 				name: loc.address,
