@@ -4,6 +4,8 @@
 
 var L = require("leaflet");
 
+require("leaflet-control-geocoder");
+
 module.exports = function() {
     return {
 	geocode: function(query, cb, context) {
