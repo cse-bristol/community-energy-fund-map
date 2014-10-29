@@ -70,6 +70,8 @@ d3.select("#geo-search")
 				.append("span")
 				.html(legend)
 				.classed("search-result-legend", true);
+
+			    el.selectAll("a").style("color", reverse(colour));
 			});
 		    });
 	    }, 
