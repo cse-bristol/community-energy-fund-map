@@ -5,7 +5,7 @@ all: clean-bin bin;
 clean: clean-bin clean-node;
 clean-bin: ; rm -rf ./bin;
 clean-tiles: ; rm -rf ./tiles;
-clean-node: ; rm-rf ./node_modules;
+clean-node: ; rm -rf ./node_modules;
 
 node_modules: ; npm install;
 bin: node_modules; mkdir -p bin; browserify map.js -o ./bin/map.js; browserify search.js -o ./bin/search.js;
