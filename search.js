@@ -60,7 +60,7 @@ d3.select("#geo-search")
 				.style("background-color", colour)
 				.style("color", reverse(colour))
 				.append("span")
-				.text(legend)
+				.html(legend)
 				.classed("search-result-legend", true);
 			});
 		    });

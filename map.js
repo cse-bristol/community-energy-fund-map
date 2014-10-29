@@ -44,5 +44,5 @@ tileLayers.overlay.colourChanged(function(colour) {
     legend
 	.style("background-color", colour)
 	.style("color", reverseColour(colour))
-	.text(tileLayers.overlay.legend(colour));
+	.html(tileLayers.overlay.legend(colour));
 });

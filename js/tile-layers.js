@@ -33,7 +33,7 @@ urbanRuralCEF.legend = function(colour) {
 	return "Not UCEF";
 
     } else if (colour.b > 0) {
-	return 'Contact DEFRA to determine';
+	return 'Contact <a href="http://www.wrap.org.uk/content/rural-community-energy-fund">WRAP</a> to determine';
     
     } else {
 	return "n/a";
