@@ -98,9 +98,6 @@ module.exports = function(map, tileLayer) {
 			.style("background-color", colour)
 			.selectAll("span")
 			.style("color", reverse(colour));
-
-		    el.selectAll("a")
-			.style("color", reverse(colour));
 		});
 
 		return result;
