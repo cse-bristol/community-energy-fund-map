@@ -10,7 +10,8 @@ module.exports = function() {
     return {
 	geocode: function(query, cb, context) {
 	    var params = {
-		address: query // + " England"
+		singleLine: query, // + " England"
+		f: "pjson"
 	    };
 
 	    L.Control.Geocoder.getJSON(
