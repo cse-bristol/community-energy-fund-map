@@ -11,7 +11,8 @@ module.exports = function() {
     return {
 	geocode: function(query, cb, context) {
 	    var params = {
-		singleLine: query + " England",
+		singleLine: query,
+		searchExtent: "-7.56,49.96,1.78,60.84",
 		f: "pjson"
 	    };
 
