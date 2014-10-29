@@ -18,12 +18,12 @@ module.exports = function(img) {
     context.drawImage(img, 0, 0);
 
     return {
-	getImageData: function(img, x, y, xSize, ySize) {
+	getImageData: function(x, y, xSize, ySize, imgWidth, imgHeight) {
 
 	    return context.getImageData(
 
-		x * canvas.width / img.width, 
-		y * canvas.height / img.height, 
+		x * (imgWidth ? (canvas.width / img.width) : 1),
+		y * (imgHeight ? (canvas.height / img.height) : 1),
 		xSize, 
 		ySize);
 	}
