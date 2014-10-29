@@ -10,7 +10,7 @@ module.exports = function() {
     return {
 	geocode: function(query, cb, context) {
 	    var params = {
-		singleLine: query, // + " England"
+		singleLine: query + " England",
 		f: "pjson"
 	    };
 
