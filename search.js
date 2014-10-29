@@ -30,9 +30,17 @@ var geocoder = new leaflet.Control.Geocoder.Nominatim({
 d3.select("#geo-search")
     .attr("placeholder", "Postcode")
     .on("input", function(d, i) {
+	var search = this.value,
+	    searchEl = this;
+
 	geocoder.geocode(
-	    this.value,
+	    search,
 	    function(results) {
+		if (search !== searchEl.value) {
+		    /* If the search text has changed, throw away these results.. */
+		    return;
+		}
+		    
 		var r = d3.select("#results")
 			.selectAll("li")
 			.data(
