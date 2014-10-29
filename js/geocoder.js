@@ -27,7 +27,7 @@ module.exports = function() {
 				northEast = L.latLng(loc.extent.ymax, loc.extent.xmin),
 				southWest = L.latLng(loc.extent.ymin, loc.extent.xmax);
 
-			    d3.set(loc.address, {
+			    results.set(loc.address, {
 				rank: i,
 				name: loc.address,
 				bbox: L.latLngBounds(northEast, southWest),
