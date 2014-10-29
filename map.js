@@ -26,7 +26,7 @@ var startCoordinates = [55.5, 0],
 require("leaflet-control-geocoder");
 var geocoder = new leaflet.Control.Geocoder({
     email: "research@cse.org.uk",
-    geocoder: require("./js/geocoder.js")())
+    geocoder: require("./js/geocoder.js")()
 });
 
 require("./js/search-legend.js")(map, tileLayers.overlay).modifyGeocoder(geocoder);
