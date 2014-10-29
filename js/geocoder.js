@@ -23,8 +23,8 @@ module.exports = function() {
 		    if (data.candidates && data.candidates.length) {
 			for (var i = 0; i <= data.candidates.length - 1; i++) {
 			    var loc = data.candidates[i],
-				northEast = L.latlng(loc.extent.ymax, loc.extent.xmin),
-				southWest = L.latlng(loc.extend.ymin, loc.extend.xmax);
+				northEast = L.latLng(loc.extent.ymax, loc.extent.xmin),
+				southWest = L.latLng(loc.extend.ymin, loc.extend.xmax);
 
 			    results[i] = {
 				name: loc.address,
