@@ -17,7 +17,9 @@ var d3 = require("d3"),
     reverse = require("./js/colour.js").reverse,
     colourResult = require("./js/search-legend.js")(map, tileLayers.overlay).colourResult;
 
-var geocoder = require("./js/geocoder.js")();
+var geocoder = require("./js/geocoder.js")(),
+    geocode = _.debounce(geocoder.geocode, 50);
+
 
 d3.select("#geo-search")
     .attr("placeholder", "Postcode")
@@ -25,7 +27,7 @@ d3.select("#geo-search")
 	var search = this.value,
 	    searchEl = this;
 
-	geocoder.geocode(
+	geocode(
 	    search,
 	    function(results) {
 		if (search !== searchEl.value) {
