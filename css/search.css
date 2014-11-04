@@ -22,7 +22,7 @@
 }
 
 .search-result {
-    width: calc(100% - 14em);
+    width: 48%;
     display: inline-block;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -32,8 +32,11 @@
 .search-result-legend {
     position: absolute;
     right: 1em;
-    width: 14em;
+    width: 48%;
     text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 #map {

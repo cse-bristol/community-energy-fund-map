@@ -57,10 +57,8 @@ body {
 #legend {
     position: absolute;
     font-size: large;
-    width: 14em;
     min-width: 7.6em;
-    max-width: 20em;
-    margin: 0.2em;
+    max-width: 54%;
     padding: 0.1em;
     padding-left: 0.3em;
     bottom: 0;
@@ -76,7 +74,7 @@ body {
 }
 
 .leaflet-control-attribution {
-   max-width: calc(100% - 25em);
+   max-width: 44%;
 }
 
 .search-result-legend {

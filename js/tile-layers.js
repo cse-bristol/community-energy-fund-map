@@ -15,7 +15,9 @@ var leaflet = require("leaflet"),
 	attribution: '<a href="./method.html">RCEF/UCEF map tiles by the Centre for Sustainable Energy</a>',
 	minZoom: 2,
 	maxNativeZoom: 16
-    });
+    }),
+
+    RCEF = '<a href="http://www.wrap.org.uk/content/rural-community-energy-fund">RCEF</a>';
     
 urbanRuralCEF.options.zIndex = 1;
 urbanRuralCEF.options.opacity = 0.6;
@@ -24,19 +26,19 @@ urbanRuralCEF.legend = function(colour) {
 	return "n/a";
 
     } else if (colour.r  === colour.b && colour.r === colour.g) {
-	return "UCEF";
+	return 'Urban area - Apply to UCEF  (0800 038 6345).';
 
     } else if (colour.g > 0 && colour.b > 0) {
-	return "Mixed (zoom in for more detail)";
+	return 'Mixed (zoom in for more detail)';
 
     } else if (colour.g > 0) {
-	return "Not UCEF";
+	return 'Rural area – Apply to ' + RCEF;
 
     } else if (colour.b > 0) {
-	return 'Contact <a href="http://www.wrap.org.uk/content/rural-community-energy-fund">WRAP</a> to determine';
+	return 'Rural fringe or large settlement serving a wider rural area – contact ' + RCEF + '.  They will assess which fund you should apply for.';
     
     } else {
-	return "n/a";
+	return 'n/a';
     }
 };
 
