@@ -30,6 +30,7 @@ var startCoordinates = [55.5, 0],
 
 require("leaflet-control-geocoder");
 var geocoder = new leaflet.Control.Geocoder({
+    collapsed: false,
     email: "research@cse.org.uk",
     geocoder: require("./js/geocoder.js")()
 });
