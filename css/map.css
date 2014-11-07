@@ -67,11 +67,14 @@ body {
 
 /*
   On phones (or other very small screens, our geocoder goes off the side of the screen.
-  Leaflet has a lot of weird relative positioning etc. which means that it's hard to know what this will do.
-  Trial and error shows that 30% is a decent value.
+  These two changes should hopefully resolve this.
  */
+.leaflet-top.leaflet-right {
+    width: 100%;
+}
+
 .leaflet-control-geocoder {
-    max-width: 30%;
+    max-width: 60%;
 }
 
 /*
