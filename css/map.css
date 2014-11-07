@@ -66,6 +66,15 @@ body {
 }
 
 /*
+  On phones (or other very small screens, our geocoder goes off the side of the screen.
+  Leaflet has a lot of weird relative positioning etc. which means that it's hard to know what this will do.
+  Trial and error shows that 30% is a decent value.
+ */
+.leaflet-control-geocoder {
+    max-width: 30%;
+}
+
+/*
   We are including the default style files that come with the Geocode plugin, so we shouldn't need to mess with it more.
   However, it looks ugly without this.
   */
