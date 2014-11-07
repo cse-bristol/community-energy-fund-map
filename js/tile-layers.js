@@ -18,7 +18,7 @@ var leaflet = require("leaflet"),
     }),
 
     RCEF = '<a href="http://www.wrap.org.uk/content/rural-community-energy-fund">RCEF</a>';
-    
+
 urbanRuralCEF.options.zIndex = 1;
 urbanRuralCEF.options.opacity = 0.6;
 urbanRuralCEF.legend = function(colour) {
@@ -36,7 +36,7 @@ urbanRuralCEF.legend = function(colour) {
 
     } else if (colour.b > 0) {
 	return 'Rural fringe or large settlement serving a wider rural area – contact ' + RCEF + '.  They will assess which fund you should apply for.';
-    
+	
     } else {
 	return 'n/a';
     }
@@ -51,15 +51,18 @@ var setupPixelHover = function(tileLayer) {
 	tileLayer.on("tileload", function(e) {
 	    e.tile.cache = imageData(e.tile);
 
-	    d3.select(e.tile)
-		.on("mousemove", function() {
-		    var rect = this.getBoundingClientRect(),
-			x = d3.event.offsetX ? d3.event.offsetX : d3.event.clientX - rect.left,
-			y = d3.event.offsetY ? d3.event.offsetY : d3.event.clientY - rect.top,
-			colourData = this.cache.getImageData(x, y, 1, 1, this.width, this.height).data;
+	    var fireColourChanged = function() {
+		var rect = this.getBoundingClientRect(),
+		    x = d3.event.offsetX ? d3.event.offsetX : d3.event.clientX - rect.left,
+		    y = d3.event.offsetY ? d3.event.offsetY : d3.event.clientY - rect.top,
+		    colourData = this.cache.getImageData(x, y, 1, 1, this.width, this.height).data;
 
-		    colourChanged(d3.rgb(colourData[0], colourData[1], colourData[2]));
-		});
+		colourChanged(d3.rgb(colourData[0], colourData[1], colourData[2]));
+	    };
+
+	    d3.select(e.tile)
+		.on("mousemove", fireColourChanged)
+		.on("click", fireColourChanged);
 	});
     }
 };

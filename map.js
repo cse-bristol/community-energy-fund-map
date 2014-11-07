@@ -15,9 +15,8 @@ var startCoordinates = [55.5, 0],
     mapDiv = body.append("div").attr("id", "map"),
     legend = body.append("div").attr("id", "legend"),
     map = new leaflet.Map("map", {
-	doubleClickZoom: false
 	/* WGS 84 World Mercator */
-	,crs: leaflet.CRS.EPSG3857
+	crs: leaflet.CRS.EPSG3857
 	,minZoom: 7
 	,maxBounds: leaflet.latLngBounds(
 	    leaflet.latLng(49.871159, -6.379880),
