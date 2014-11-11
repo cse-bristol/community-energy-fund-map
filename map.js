@@ -17,11 +17,6 @@ var startCoordinates = [55.5, 0],
     map = new leaflet.Map("map", {
 	/* WGS 84 World Mercator */
 	crs: leaflet.CRS.EPSG3857
-	,minZoom: 7
-	,maxBounds: leaflet.latLngBounds(
-	    leaflet.latLng(49.871159, -6.379880),
-	    leaflet.latLng(55.811741, 1.768960)
-	)
     })
 	.setView(startCoordinates, zoom),
     tileLayers = require("./js/tile-layers.js")(map),
