@@ -41,8 +41,8 @@ tileLayers.overlay.colourChanged(function(colour) {
 	legendText = tileLayers.overlay.legend(colour);
 
     legend
-    	.style("left", mouse[0] + "px")
-	.style("top", mouse[1] + "px")
+    	.style("left", (10 + mouse[0]) + "px")
+	.style("top", (10 + mouse[1]) + "px")
 	.style("background-color", colour)
 	.style("color", reverseColour(colour))
 	.html(legendText)
