@@ -37,14 +37,18 @@ map
     .addLayer(tileLayers.overlay);
 
 tileLayers.overlay.colourChanged(function(colour) {
-    var mouse = d3.mouse(document.body);
+    var mouse = d3.mouse(document.body),
+	legend = tileLayers.overlay.legend(colour);
 
     legend
     	.style("left", mouse[0] + "px")
 	.style("top", mouse[1] + "px")
 	.style("background-color", colour)
 	.style("color", reverseColour(colour))
-	.html(tileLayers.overlay.legend(colour));
+	.html(legend)
+	.style("visibility", function(d, i) {
+	    return legend === "n/a" ? "hidden" : "visible";
+	});
 
     legend.selectAll("a")
 	.style("color", reverseColour(colour));
