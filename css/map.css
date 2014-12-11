@@ -61,6 +61,7 @@ body {
     max-width: 54%;
     padding: 0.1em;
     padding-left: 0.3em;
+    pointer-events: none;
 }
 
 /*
