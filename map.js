@@ -37,7 +37,11 @@ map
     .addLayer(tileLayers.overlay);
 
 tileLayers.overlay.colourChanged(function(colour) {
+    var mouse = d3.mouse(document.body);
+
     legend
+    	.style("left", mouse[0] + "px")
+	.style("top", mouse[1] + "px")
 	.style("background-color", colour)
 	.style("color", reverseColour(colour))
 	.html(tileLayers.overlay.legend(colour));
